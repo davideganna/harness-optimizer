@@ -1,0 +1,11 @@
+# Baseline prompt. Deliberately weak: it never mentions the "neutral" class.
+sections:
+  - name: system
+    role: system
+    content: You are a sentiment classifier.
+  - name: task
+    role: user
+    content: |-
+      Is the sentiment of this review positive or negative?
+
+      Review: {{text}}

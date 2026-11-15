@@ -1,0 +1,30 @@
+{"id": "s00", "inputs": {"text": "I absolutely love this phone, the battery lasts forever."}, "expected": "positive"}
+{"id": "s01", "inputs": {"text": "Fantastic service, the staff were friendly and fast."}, "expected": "positive"}
+{"id": "s02", "inputs": {"text": "Best purchase I've made this year."}, "expected": "positive"}
+{"id": "s03", "inputs": {"text": "The movie was wonderful from start to finish."}, "expected": "positive"}
+{"id": "s04", "inputs": {"text": "Great value for the price, would buy again."}, "expected": "positive"}
+{"id": "s05", "inputs": {"text": "The hotel room was spotless and the view was amazing."}, "expected": "positive"}
+{"id": "s06", "inputs": {"text": "Delivery came a day early, very happy."}, "expected": "positive"}
+{"id": "s07", "inputs": {"text": "This book is brilliant and beautifully written."}, "expected": "positive"}
+{"id": "s08", "inputs": {"text": "Excellent sound quality on these headphones."}, "expected": "positive"}
+{"id": "s09", "inputs": {"text": "Our waiter was great and the pasta was delicious."}, "expected": "positive"}
+{"id": "s10", "inputs": {"text": "Terrible experience, the package arrived broken."}, "expected": "negative"}
+{"id": "s11", "inputs": {"text": "I hate how slow this laptop is."}, "expected": "negative"}
+{"id": "s12", "inputs": {"text": "The food was cold and the waiter was rude."}, "expected": "negative"}
+{"id": "s13", "inputs": {"text": "Worst customer support I have ever dealt with."}, "expected": "negative"}
+{"id": "s14", "inputs": {"text": "The app crashes every time I open it. Awful."}, "expected": "negative"}
+{"id": "s15", "inputs": {"text": "Very disappointed, it stopped working after two days."}, "expected": "negative"}
+{"id": "s16", "inputs": {"text": "The plot was boring and the acting was bad."}, "expected": "negative"}
+{"id": "s17", "inputs": {"text": "Overpriced and poorly made."}, "expected": "negative"}
+{"id": "s18", "inputs": {"text": "I want a refund, this is useless."}, "expected": "negative"}
+{"id": "s19", "inputs": {"text": "Not great: the screen scratches easily."}, "expected": "negative"}
+{"id": "s20", "inputs": {"text": "The package arrived on Tuesday."}, "expected": "neutral"}
+{"id": "s21", "inputs": {"text": "The store opens at 9am on weekdays."}, "expected": "neutral"}
+{"id": "s22", "inputs": {"text": "It comes in black, white and blue."}, "expected": "neutral"}
+{"id": "s23", "inputs": {"text": "I ordered the medium size."}, "expected": "neutral"}
+{"id": "s24", "inputs": {"text": "The meeting has been moved to Thursday."}, "expected": "neutral"}
+{"id": "s25", "inputs": {"text": "The manual is 40 pages long."}, "expected": "neutral"}
+{"id": "s26", "inputs": {"text": "They replaced the old model with a new one last month."}, "expected": "neutral"}
+{"id": "s27", "inputs": {"text": "The film is about two hours long."}, "expected": "neutral"}
+{"id": "s28", "inputs": {"text": "I used it for the first time yesterday."}, "expected": "neutral"}
+{"id": "s29", "inputs": {"text": "The hotel is located near the train station."}, "expected": "neutral"}

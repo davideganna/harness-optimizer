@@ -1,0 +1,15 @@
+# Improved prompt: names all three labels and pins the output format.
+sections:
+  - name: system
+    role: system
+    content: You are a sentiment classifier.
+  - name: task
+    role: user
+    content: |-
+      Classify the sentiment of the review as exactly one of: positive, negative, neutral.
+      Use neutral for purely factual statements with no opinion.
+
+      Review: {{text}}
+  - name: output_format
+    role: user
+    content: Answer with the single label only, in lowercase, with no punctuation.
