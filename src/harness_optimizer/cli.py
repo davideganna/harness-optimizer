@@ -3,6 +3,7 @@
     harness-opt eval    --prompt p.yaml --data d.jsonl --metric exact_match [--split val]
     harness-opt compare runs/<a> runs/<b>
     harness-opt optimize --prompt p.yaml --data d.jsonl --rounds 3
+    harness-opt ablate   --prompt p.yaml --data d.jsonl --variants base full --seeds 0 1 2
 """
 
 from __future__ import annotations
@@ -20,6 +21,7 @@ from harness_optimizer.core import Candidate, Dataset, EvalReport, ModelConfig, 
 from harness_optimizer.core.task import DEFAULT_AGENT_MODELS, DEFAULT_MODELS, DEFAULT_PROVIDER
 from harness_optimizer.eval import EvalRunner, paired_bootstrap
 from harness_optimizer.eval.metrics import BUILTIN
+from harness_optimizer.experiments.ablation import PRESETS
 from harness_optimizer.llm import LLMGateway, MockLLM, NullCache, SQLiteCache
 from harness_optimizer.obs import JsonlTracer
 
@@ -90,8 +92,80 @@ def _target_config(args) -> ModelConfig:
     )
 
 
+def _agent_config(args) -> ModelConfig:
+    return ModelConfig(
+        provider=args.provider,
+        model=args.agent_model or DEFAULT_AGENT_MODELS[args.provider],
+        max_tokens=args.agent_max_tokens,
+    )
+
+
+def _pipeline_config(args, **overrides):
+    from harness_optimizer.agents import PipelineConfig
+
+    return PipelineConfig(
+        minibatch_size=args.minibatch,
+        max_hypotheses=args.hypotheses,
+        proposals_per_hypothesis=args.proposals,
+        val_candidates=args.val_candidates,
+        seed=args.seed,
+        halving_rungs=tuple(args.rungs),
+        **overrides,
+    )
+
+
+def cmd_ablate(args) -> int:
+    import asyncio
+
+    from harness_optimizer.experiments import run_ablation
+    from harness_optimizer.policy import Budget
+    from harness_optimizer.search import PairedImprovement
+
+    logging.basicConfig(level=logging.WARNING, format="%(message)s", stream=sys.stdout)
+    unknown = [v for v in args.variants if v not in PRESETS]
+    if unknown:
+        raise SystemExit(f"unknown variants {unknown}; presets: {sorted(PRESETS)}")
+    out_dir = Path(args.out) / (args.run_name or datetime.now().strftime("ablate-%Y%m%d-%H%M%S"))
+    client = _build_client(args)
+    cache = NullCache() if args.no_cache else SQLiteCache(args.cache)
+
+    def make_gateway(variant: str, seed: int) -> LLMGateway:
+        tracer = JsonlTracer(out_dir / f"{variant}-seed{seed}" / "trace.jsonl")
+        return LLMGateway(client, cache=cache, tracer=tracer, max_concurrency=args.concurrency)
+
+    def show(row) -> None:
+        if row.error:
+            print(f"{row.variant:>10} seed {row.seed}: FAILED {row.error[:150]}", flush=True)
+            return
+        print(f"{row.variant:>10} seed {row.seed}: test {row.test_baseline:.3f} -> {row.test_best:.3f} | "
+              f"val {row.val_baseline:.3f} -> {row.val_best:.3f} | accepted {row.accepted}/{row.rounds} | "
+              f"calls target={row.target_calls} agents={row.agent_calls} | {row.seconds:.0f}s", flush=True)
+
+    print(f"variants={args.variants} seeds={args.seeds} -> {out_dir}", flush=True)
+    result = asyncio.run(run_ablation(
+        PromptTemplate.from_yaml(args.prompt),
+        Dataset.from_jsonl(args.data),
+        variants=[PRESETS[v] for v in args.variants],
+        seeds=args.seeds,
+        make_gateway=make_gateway,
+        target=_target_config(args),
+        metrics=[BUILTIN[name]() for name in args.metric],
+        agent_model=_agent_config(args),
+        base_config=_pipeline_config(args),
+        budget=Budget(max_rounds=args.rounds, patience=args.patience, max_llm_calls=args.max_calls),
+        acceptance=PairedImprovement(alpha=args.alpha),
+        fractions=(args.train, args.val, round(1 - args.train - args.val, 10)),
+        stratify_by=args.stratify_by,
+        out_dir=out_dir,
+        on_row=show,
+    ))
+    print("\n" + result.table())
+    print(f"\nsaved to {out_dir}")
+    return 0
+
+
 def cmd_optimize(args) -> int:
-    from harness_optimizer.agents import OptimizationPipeline, PipelineConfig, RoundRecord
+    from harness_optimizer.agents import OptimizationPipeline, RoundRecord
     from harness_optimizer.policy import Budget
     from harness_optimizer.search import PairedImprovement
 
@@ -110,11 +184,7 @@ def cmd_optimize(args) -> int:
         tracer=JsonlTracer(out_dir / "trace.jsonl"),
         max_concurrency=args.concurrency,
     )
-    agent_model = ModelConfig(
-        provider=args.provider,
-        model=args.agent_model or DEFAULT_AGENT_MODELS[args.provider],
-        max_tokens=args.agent_max_tokens,
-    )
+    agent_model = _agent_config(args)
 
     def show(record: RoundRecord) -> None:
         for h in record.hypotheses:
@@ -140,16 +210,8 @@ def cmd_optimize(args) -> int:
         metrics=[BUILTIN[name]() for name in args.metric],
         splits=splits,
         agent_model=agent_model,
-        config=PipelineConfig(
-            minibatch_size=args.minibatch,
-            max_hypotheses=args.hypotheses,
-            proposals_per_hypothesis=args.proposals,
-            val_candidates=args.val_candidates,
-            seed=args.seed,
-            screen=args.screen,
-            halving_rungs=tuple(args.rungs),
-            use_critic=args.critic,
-            use_reflector=not args.no_reflector,
+        config=_pipeline_config(
+            args, screen=args.screen, use_critic=args.critic, use_reflector=not args.no_reflector
         ),
         budget=Budget(max_rounds=args.rounds, patience=args.patience, max_llm_calls=args.max_calls),
         acceptance=PairedImprovement(alpha=args.alpha),
@@ -208,28 +270,39 @@ def build_parser() -> argparse.ArgumentParser:
     e.add_argument("--show-failures", type=int, default=5)
     e.set_defaults(func=cmd_eval)
 
+    def add_optimizer(sp: argparse.ArgumentParser, train: float, val: float) -> None:
+        sp.add_argument("--agent-model", help=f"model for the optimizer agents (defaults: {DEFAULT_AGENT_MODELS})")
+        sp.add_argument("--agent-max-tokens", type=int, default=1024)
+        sp.add_argument("--rounds", type=int, default=3)
+        sp.add_argument("--patience", type=int, default=2)
+        sp.add_argument("--max-calls", type=int, help="cap on uncached LLM calls")
+        sp.add_argument("--minibatch", type=int, default=12)
+        sp.add_argument("--hypotheses", type=int, default=2)
+        sp.add_argument("--proposals", type=int, default=2, help="proposals per hypothesis")
+        sp.add_argument("--val-candidates", type=int, default=2)
+        sp.add_argument("--rungs", type=int, nargs="+", default=[4, 8, 16],
+                        help="successive-halving slice sizes (with --screen halving)")
+        sp.add_argument("--alpha", type=float, default=0.1, help="acceptance significance level")
+        sp.add_argument("--train", type=float, default=train, help="train fraction")
+        sp.add_argument("--val", type=float, default=val, help="val fraction (test = rest)")
+        sp.add_argument("--stratify-by", help="metadata key or 'expected' to stratify splits")
+
     o = sub.add_parser("optimize", help="optimize a prompt with the agent pipeline")
     add_common(o)
-    o.add_argument("--agent-model", help=f"model for the optimizer agents (defaults: {DEFAULT_AGENT_MODELS})")
-    o.add_argument("--agent-max-tokens", type=int, default=1024)
-    o.add_argument("--rounds", type=int, default=3)
-    o.add_argument("--patience", type=int, default=2)
-    o.add_argument("--max-calls", type=int, help="cap on uncached LLM calls")
-    o.add_argument("--minibatch", type=int, default=12)
-    o.add_argument("--hypotheses", type=int, default=2)
-    o.add_argument("--proposals", type=int, default=2, help="proposals per hypothesis")
-    o.add_argument("--val-candidates", type=int, default=2)
+    add_optimizer(o, train=0.5, val=0.25)
     o.add_argument("--screen", default="minibatch", choices=["minibatch", "halving"],
                    help="train screening: one shared minibatch, or successive halving")
-    o.add_argument("--rungs", type=int, nargs="+", default=[4, 8, 16],
-                   help="successive-halving slice sizes (with --screen halving)")
     o.add_argument("--critic", action="store_true", help="LLM review of each edit before measuring it")
     o.add_argument("--no-reflector", action="store_true", help="disable lessons between rounds")
-    o.add_argument("--alpha", type=float, default=0.1, help="acceptance significance level")
-    o.add_argument("--train", type=float, default=0.5, help="train fraction")
-    o.add_argument("--val", type=float, default=0.25, help="val fraction (test = rest)")
-    o.add_argument("--stratify-by", help="metadata key or 'expected' to stratify splits")
     o.set_defaults(func=cmd_optimize)
+
+    a = sub.add_parser("ablate", help="run optimizer variants over several seeds and compare them")
+    add_common(a)
+    add_optimizer(a, train=0.4, val=0.3)
+    a.add_argument("--variants", nargs="+", default=["base", "reflector", "critic", "halving", "full"],
+                   help="preset names: " + ", ".join(PRESETS))
+    a.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
+    a.set_defaults(func=cmd_ablate)
 
     c = sub.add_parser("compare", help="paired bootstrap between two saved runs")
     c.add_argument("baseline")

@@ -45,3 +45,23 @@ def test_cli_optimize_with_mock(tmp_path, capsys, monkeypatch):
     run = tmp_path / "opt"
     assert (run / "best_prompt.yaml").exists() and (run / "result.json").exists()
     assert (run / "candidates.jsonl").exists()
+
+
+def test_cli_ablate_with_mock(tmp_path, capsys, monkeypatch):
+    from test_pipeline import dataset
+
+    from harness_optimizer.core import PromptTemplate
+
+    monkeypatch.syspath_prepend(str(Path(__file__).parent))
+    data = tmp_path / "toy.jsonl"
+    dataset().to_jsonl(data)
+    prompt = tmp_path / "p.yaml"
+    PromptTemplate.from_string("Is this review positive or negative?\nReview: {{text}}").to_yaml(prompt)
+    rc = main(["ablate", "--prompt", str(prompt), "--data", str(data), "--provider", "mock",
+               "--mock-responder", "test_pipeline:cli_responder", "--no-cache", "--stratify-by", "expected",
+               "--variants", "base", "halving", "--seeds", "0", "1", "--rounds", "2", "--minibatch", "8",
+               "--rungs", "4", "8", "--out", str(tmp_path), "--run-name", "abl"])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "| base | 2 |" in out and "| halving | 2 |" in out
+    assert (tmp_path / "abl" / "rows.jsonl").read_text().count("\n") == 4

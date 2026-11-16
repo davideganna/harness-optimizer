@@ -1,0 +1,20 @@
+# Hand-written reference prompt that states every convention. It is an upper-bound check that
+# the task is learnable by the target model, not something the optimizer ever sees.
+sections:
+  - name: system
+    role: system
+    content: You extract dates from text and normalize them.
+  - name: task
+    role: user
+    content: |-
+      Find the date in the text and write it as YYYY-MM-DD.
+
+      Rules:
+      - Numeric dates are day-first (European): 04/03/2025 means 4 March 2025.
+      - A date that starts with a four-digit year is year/month/day.
+      - Two-digit years mean 20YY: 05/11/27 is 2027-11-05.
+      - Ignore times, amounts and codes.
+
+      Answer with the date only, for example 2025-03-04. No other words.
+
+      Text: {{text}}

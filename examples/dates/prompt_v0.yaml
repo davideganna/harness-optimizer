@@ -1,0 +1,8 @@
+# Baseline prompt. Deliberately weak: it states no output format and none of the data's conventions.
+sections:
+  - name: task
+    role: user
+    content: |-
+      What date is mentioned in this text?
+
+      Text: {{text}}

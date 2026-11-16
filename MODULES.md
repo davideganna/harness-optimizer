@@ -4,7 +4,7 @@ A plain-language tour of the project: what each file contains and what it is for
 instead of the code to see how the pieces fit together. **The file is kept in sync with the code:
 when a module changes, its description here changes too.**
 
-Last updated: 2026-11-15
+Last updated: 2026-11-16
 
 ## The big picture
 
@@ -33,6 +33,7 @@ The source code lives in `src/harness_optimizer/`, organized in folders:
 | `policy/` | The spending and stopping limits. |
 | `search/` | Deciding which new prompts deserve more measuring, and whether one replaces the current best. |
 | `obs/` | The logbook that records everything that happens. |
+| `experiments/` | Running the optimizer many times to find out which of its parts really help. |
 
 ---
 
@@ -47,12 +48,15 @@ Reads a private `.env` file, which is where you would keep an API key for Claude
 overwrites settings you already have.
 
 ### `cli.py`: the command-line tool
-What runs when you type `harness-opt` in a terminal. It has three commands:
+What runs when you type `harness-opt` in a terminal. It has four commands:
 - **eval**: measures one prompt on a dataset, saves the results in the `runs/` folder, and
   prints the score and a few of the worst mistakes.
 - **optimize**: starts the automatic optimizer on a prompt. It prints what happens in each
   round, then saves the best prompt it found and the history of the edits that led to it.
 - **compare**: takes two saved runs and says whether one prompt is really better than the other.
+- **ablate**: runs several versions of the optimizer (for example with and without the Critic)
+  several times each, with different random splits of the data, and prints a table comparing
+  how good their final prompts were and how many model calls they used.
 
 Options control which model to use, how many rounds to run, how much data goes to training
 and how much to validation, and so on. Switches turn the optional parts of the optimizer on or
@@ -302,12 +306,40 @@ run can be inspected afterwards. Planned: readable run reports and replaying pas
 
 ---
 
+## `experiments/`: research runs
+
+### `ablation.py`: which parts of the optimizer help?
+An **ablation** switches parts of a system off one at a time to see what each part contributes.
+This file defines ready-made variants of the optimizer: `base` (the plain loop), `reflector`
+(plus lessons), `critic` (plus the Critic), `halving` (plus successive halving) and `full`
+(everything). It runs every variant once per random seed; the seed changes how the data is split,
+so the spread between seeds shows how much of a difference is real rather than luck. All variants
+of the same seed use exactly the same data split, so they are compared fairly.
+
+For each run it records the validation and test scores before and after, how many rounds and
+improvements there were, how long it took, and how many model calls were made, separately for
+the model being tested and for the agents. Answers served from the saved-answer archive still
+count as calls, so a variant doesn't look cheaper just because it ran after another one.
+Results are written to disk after every run. If a long ablation is interrupted, running it again
+skips the runs that already finished, and runs that crashed are retried. A crash in one run is
+recorded instead of stopping the whole ablation. At the end it writes a summary table.
+
+---
+
 ## Outside the package
 
+- **`examples/dates/`**: a harder benchmark. The task is to find the date in a short text and
+  write it as `YYYY-MM-DD`. The data follows rules the weak starting prompt never mentions:
+  answer with the date only, numbers like `04/03/2025` are day-first (4 March), two-digit years
+  mean 20xx, and dates hide in sentences with times and amounts. The optimizer has to discover
+  these rules from mistakes, over several rounds. A script generates the 120 examples (the same
+  ones every time), each tagged with its date style so splits stay balanced. A hand-written
+  reference prompt stating every rule checks that the task is doable: the weak prompt scores
+  0.00 and the reference prompt 0.97 with the default local model.
 - **`examples/sentiment/`**: a small worked example that classifies reviews as positive,
   negative or neutral. It contains the labeled reviews, a deliberately weak prompt (it never
   mentions "neutral"), an improved prompt, a fake model that reacts to the wording of the prompt
   so improvements show up even offline, and a demo script that compares the two prompts.
 - **`tests/`**: automated tests that check each part of the project. There is one file per area
   (prompts, datasets, gateway, scorers, runner, statistics, agents, pipeline, successive
-  halving, limits and archive, command line, and the two model connections).
+  halving, ablations, limits and archive, command line, and the two model connections).

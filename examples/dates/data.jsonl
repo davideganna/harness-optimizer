@@ -1,0 +1,120 @@
+{"id": "written_eu-16", "inputs": {"text": "16th of August, 2027"}, "expected": "2027-08-16", "metadata": {"family": "written_eu"}}
+{"id": "year_first-15", "inputs": {"text": "The package left the warehouse on 2022/01/12, tracking code 5907."}, "expected": "2022-01-12", "metadata": {"family": "year_first"}}
+{"id": "two_digit_year-12", "inputs": {"text": "Flight AZ3705 departs 16/06/28 from gate 11."}, "expected": "2028-06-16", "metadata": {"family": "two_digit_year"}}
+{"id": "written_eu-06", "inputs": {"text": "Your appointment is confirmed for 18 August 2027 at 15:30."}, "expected": "2027-08-18", "metadata": {"family": "written_eu"}}
+{"id": "numeric_unambiguous-17", "inputs": {"text": "Signed in Milan on 18.11.2029."}, "expected": "2029-11-18", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "two_digit_year-04", "inputs": {"text": "Payment of 806.56 EUR received on 18/02/25."}, "expected": "2025-02-18", "metadata": {"family": "two_digit_year"}}
+{"id": "written_eu-07", "inputs": {"text": "Invoice #6683 of 18 Apr 2025: total due 982.86 EUR."}, "expected": "2025-04-18", "metadata": {"family": "written_eu"}}
+{"id": "written_eu-11", "inputs": {"text": "18th of May, 2029"}, "expected": "2029-05-18", "metadata": {"family": "written_eu"}}
+{"id": "written_us-06", "inputs": {"text": "February 3, 2026"}, "expected": "2026-02-03", "metadata": {"family": "written_us"}}
+{"id": "written_eu-01", "inputs": {"text": "Payment of 769.10 EUR received on 13 June 2029."}, "expected": "2029-06-13", "metadata": {"family": "written_eu"}}
+{"id": "numeric_unambiguous-03", "inputs": {"text": "Flight AZ1975 departs 15/12/2019 from gate 20."}, "expected": "2019-12-15", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "two_digit_year-14", "inputs": {"text": "Your appointment is confirmed for 13/05/24 at 11:00."}, "expected": "2024-05-13", "metadata": {"family": "two_digit_year"}}
+{"id": "numeric_unambiguous-02", "inputs": {"text": "The package left the warehouse on 17.6.2026, tracking code 8018."}, "expected": "2026-06-17", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "two_digit_year-13", "inputs": {"text": "Flight AZ1390 departs 26/08/29 from gate 39."}, "expected": "2029-08-26", "metadata": {"family": "two_digit_year"}}
+{"id": "written_us-13", "inputs": {"text": "The package left the warehouse on June 26, 2022, tracking code 1118."}, "expected": "2022-06-26", "metadata": {"family": "written_us"}}
+{"id": "written_eu-14", "inputs": {"text": "10th of October, 2021"}, "expected": "2021-10-10", "metadata": {"family": "written_eu"}}
+{"id": "written_us-01", "inputs": {"text": "The package left the warehouse on October 7, 2024, tracking code 1653."}, "expected": "2024-10-07", "metadata": {"family": "written_us"}}
+{"id": "two_digit_year-08", "inputs": {"text": "22/05/27"}, "expected": "2027-05-22", "metadata": {"family": "two_digit_year"}}
+{"id": "written_us-15", "inputs": {"text": "Invoice #3288 of February 12, 2025: total due 994.23 EUR."}, "expected": "2025-02-12", "metadata": {"family": "written_us"}}
+{"id": "two_digit_year-03", "inputs": {"text": "Invoice #744 of 15/04/25: total due 991.23 EUR."}, "expected": "2025-04-15", "metadata": {"family": "two_digit_year"}}
+{"id": "written_eu-10", "inputs": {"text": "5 May 2020"}, "expected": "2020-05-05", "metadata": {"family": "written_eu"}}
+{"id": "two_digit_year-18", "inputs": {"text": "Payment of 588.15 EUR received on 14/01/25."}, "expected": "2025-01-14", "metadata": {"family": "two_digit_year"}}
+{"id": "numeric_ambiguous-17", "inputs": {"text": "Signed in Milan on 06/05/2028."}, "expected": "2028-05-06", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_ambiguous-07", "inputs": {"text": "Meeting moved to 05-11-2021 (room 10)."}, "expected": "2021-11-05", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "year_first-18", "inputs": {"text": "Payment of 634.41 EUR received on 2025/11/13."}, "expected": "2025-11-13", "metadata": {"family": "year_first"}}
+{"id": "numeric_ambiguous-03", "inputs": {"text": "The package left the warehouse on 08/02/2019, tracking code 7449."}, "expected": "2019-02-08", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "two_digit_year-17", "inputs": {"text": "The package left the warehouse on 14/08/22, tracking code 2998."}, "expected": "2022-08-14", "metadata": {"family": "two_digit_year"}}
+{"id": "written_us-19", "inputs": {"text": "Meeting moved to March 23, 2028 (room 17)."}, "expected": "2028-03-23", "metadata": {"family": "written_us"}}
+{"id": "year_first-08", "inputs": {"text": "Your appointment is confirmed for 2019/10/27 at 17:15."}, "expected": "2019-10-27", "metadata": {"family": "year_first"}}
+{"id": "written_eu-05", "inputs": {"text": "Your appointment is confirmed for 23 November 2025 at 15:00."}, "expected": "2025-11-23", "metadata": {"family": "written_eu"}}
+{"id": "numeric_ambiguous-08", "inputs": {"text": "Invoice #631 of 02-08-2025: total due 622.79 EUR."}, "expected": "2025-08-02", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_ambiguous-14", "inputs": {"text": "Invoice #5799 of 03-06-2020: total due 192.01 EUR."}, "expected": "2020-06-03", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "year_first-16", "inputs": {"text": "Meeting moved to 2019/12/24 (room 27)."}, "expected": "2019-12-24", "metadata": {"family": "year_first"}}
+{"id": "numeric_unambiguous-04", "inputs": {"text": "Flight AZ3907 departs 25/12/2025 from gate 26."}, "expected": "2025-12-25", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "written_eu-18", "inputs": {"text": "Your appointment is confirmed for 13 January 2022 at 14:30."}, "expected": "2022-01-13", "metadata": {"family": "written_eu"}}
+{"id": "written_eu-12", "inputs": {"text": "The package left the warehouse on 12 July 2029, tracking code 245."}, "expected": "2029-07-12", "metadata": {"family": "written_eu"}}
+{"id": "numeric_ambiguous-15", "inputs": {"text": "Meeting moved to 01.04.2021 (room 2)."}, "expected": "2021-04-01", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "two_digit_year-07", "inputs": {"text": "19/12/20"}, "expected": "2020-12-19", "metadata": {"family": "two_digit_year"}}
+{"id": "written_us-02", "inputs": {"text": "Invoice #7835 of March 10, 2028: total due 583.12 EUR."}, "expected": "2028-03-10", "metadata": {"family": "written_us"}}
+{"id": "numeric_ambiguous-02", "inputs": {"text": "01.04.2028"}, "expected": "2028-04-01", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_ambiguous-16", "inputs": {"text": "Payment of 353.60 EUR received on 12/08/2020."}, "expected": "2020-08-12", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "written_eu-08", "inputs": {"text": "Your appointment is confirmed for 7 Jan 2024 at 8:00."}, "expected": "2024-01-07", "metadata": {"family": "written_eu"}}
+{"id": "written_us-09", "inputs": {"text": "The package left the warehouse on February 3, 2026, tracking code 1414."}, "expected": "2026-02-03", "metadata": {"family": "written_us"}}
+{"id": "written_eu-09", "inputs": {"text": "The package left the warehouse on 23 May 2023, tracking code 1432."}, "expected": "2023-05-23", "metadata": {"family": "written_eu"}}
+{"id": "written_eu-13", "inputs": {"text": "26 Jun 2024"}, "expected": "2024-06-26", "metadata": {"family": "written_eu"}}
+{"id": "two_digit_year-15", "inputs": {"text": "Meeting moved to 22/08/24 (room 23)."}, "expected": "2024-08-22", "metadata": {"family": "two_digit_year"}}
+{"id": "two_digit_year-02", "inputs": {"text": "Flight AZ1434 departs 15/08/25 from gate 10."}, "expected": "2025-08-15", "metadata": {"family": "two_digit_year"}}
+{"id": "year_first-13", "inputs": {"text": "2023/05/18"}, "expected": "2023-05-18", "metadata": {"family": "year_first"}}
+{"id": "two_digit_year-16", "inputs": {"text": "Your appointment is confirmed for 21/08/19 at 8:15."}, "expected": "2019-08-21", "metadata": {"family": "two_digit_year"}}
+{"id": "numeric_unambiguous-11", "inputs": {"text": "Meeting moved to 20/1/2026 (room 34)."}, "expected": "2026-01-20", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "numeric_ambiguous-13", "inputs": {"text": "Flight AZ593 departs 01-12-2021 from gate 17."}, "expected": "2021-12-01", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_unambiguous-08", "inputs": {"text": "Meeting moved to 21/9/2028 (room 24)."}, "expected": "2028-09-21", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "written_us-12", "inputs": {"text": "October 21, 2026"}, "expected": "2026-10-21", "metadata": {"family": "written_us"}}
+{"id": "numeric_unambiguous-10", "inputs": {"text": "Signed in Milan on 16/11/2024."}, "expected": "2024-11-16", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "year_first-14", "inputs": {"text": "Signed in Milan on 2027/03/26."}, "expected": "2027-03-26", "metadata": {"family": "year_first"}}
+{"id": "written_us-11", "inputs": {"text": "Flight AZ1449 departs October 9, 2025 from gate 8."}, "expected": "2025-10-09", "metadata": {"family": "written_us"}}
+{"id": "two_digit_year-00", "inputs": {"text": "Payment of 503.44 EUR received on 24/12/29."}, "expected": "2029-12-24", "metadata": {"family": "two_digit_year"}}
+{"id": "numeric_ambiguous-18", "inputs": {"text": "Signed in Milan on 12.05.2021."}, "expected": "2021-05-12", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_unambiguous-13", "inputs": {"text": "Payment of 117.55 EUR received on 23/11/2023."}, "expected": "2023-11-23", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "numeric_unambiguous-19", "inputs": {"text": "Invoice #8880 of 20/6/2022: total due 476.41 EUR."}, "expected": "2022-06-20", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "written_eu-17", "inputs": {"text": "The package left the warehouse on 11 May 2019, tracking code 1524."}, "expected": "2019-05-11", "metadata": {"family": "written_eu"}}
+{"id": "numeric_unambiguous-15", "inputs": {"text": "Flight AZ7297 departs 26.7.2025 from gate 38."}, "expected": "2025-07-26", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "written_eu-02", "inputs": {"text": "The package left the warehouse on 9 September 2019, tracking code 4816."}, "expected": "2019-09-09", "metadata": {"family": "written_eu"}}
+{"id": "written_eu-03", "inputs": {"text": "Payment of 618.24 EUR received on 5th of October, 2029."}, "expected": "2029-10-05", "metadata": {"family": "written_eu"}}
+{"id": "numeric_ambiguous-09", "inputs": {"text": "04/06/2029"}, "expected": "2029-06-04", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_unambiguous-07", "inputs": {"text": "18/5/2023"}, "expected": "2023-05-18", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "year_first-01", "inputs": {"text": "Your appointment is confirmed for 2021/10/20 at 12:30."}, "expected": "2021-10-20", "metadata": {"family": "year_first"}}
+{"id": "two_digit_year-06", "inputs": {"text": "Meeting moved to 14/12/21 (room 33)."}, "expected": "2021-12-14", "metadata": {"family": "two_digit_year"}}
+{"id": "numeric_unambiguous-01", "inputs": {"text": "The package left the warehouse on 20.9.2020, tracking code 7009."}, "expected": "2020-09-20", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "year_first-00", "inputs": {"text": "The package left the warehouse on 2019/03/24, tracking code 9895."}, "expected": "2019-03-24", "metadata": {"family": "year_first"}}
+{"id": "two_digit_year-01", "inputs": {"text": "Invoice #8215 of 18/05/19: total due 751.56 EUR."}, "expected": "2019-05-18", "metadata": {"family": "two_digit_year"}}
+{"id": "written_eu-00", "inputs": {"text": "The package left the warehouse on 15 October 2020, tracking code 9424."}, "expected": "2020-10-15", "metadata": {"family": "written_eu"}}
+{"id": "written_us-07", "inputs": {"text": "Meeting moved to September 11, 2020 (room 25)."}, "expected": "2020-09-11", "metadata": {"family": "written_us"}}
+{"id": "numeric_unambiguous-05", "inputs": {"text": "Your appointment is confirmed for 22/5/2020 at 12:45."}, "expected": "2020-05-22", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "written_eu-19", "inputs": {"text": "Invoice #9688 of 14th of April, 2029: total due 805.21 EUR."}, "expected": "2029-04-14", "metadata": {"family": "written_eu"}}
+{"id": "numeric_ambiguous-11", "inputs": {"text": "Meeting moved to 12-08-2025 (room 32)."}, "expected": "2025-08-12", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_unambiguous-18", "inputs": {"text": "Signed in Milan on 26/2/2021."}, "expected": "2021-02-26", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "numeric_unambiguous-16", "inputs": {"text": "Payment of 657.89 EUR received on 23.2.2028."}, "expected": "2028-02-23", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "written_us-18", "inputs": {"text": "Invoice #4362 of August 2, 2027: total due 377.93 EUR."}, "expected": "2027-08-02", "metadata": {"family": "written_us"}}
+{"id": "numeric_ambiguous-12", "inputs": {"text": "Signed in Milan on 03.04.2022."}, "expected": "2022-04-03", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "year_first-07", "inputs": {"text": "Meeting moved to 2020/10/11 (room 22)."}, "expected": "2020-10-11", "metadata": {"family": "year_first"}}
+{"id": "year_first-10", "inputs": {"text": "2019/08/05"}, "expected": "2019-08-05", "metadata": {"family": "year_first"}}
+{"id": "year_first-03", "inputs": {"text": "Signed in Milan on 2021/12/25."}, "expected": "2021-12-25", "metadata": {"family": "year_first"}}
+{"id": "year_first-19", "inputs": {"text": "Your appointment is confirmed for 2023/01/16 at 12:15."}, "expected": "2023-01-16", "metadata": {"family": "year_first"}}
+{"id": "year_first-04", "inputs": {"text": "Flight AZ727 departs 2023/09/10 from gate 8."}, "expected": "2023-09-10", "metadata": {"family": "year_first"}}
+{"id": "numeric_ambiguous-00", "inputs": {"text": "Invoice #3404 of 04.06.2022: total due 131.63 EUR."}, "expected": "2022-06-04", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "two_digit_year-19", "inputs": {"text": "The package left the warehouse on 20/03/27, tracking code 3989."}, "expected": "2027-03-20", "metadata": {"family": "two_digit_year"}}
+{"id": "year_first-02", "inputs": {"text": "Payment of 251.64 EUR received on 2026/02/12."}, "expected": "2026-02-12", "metadata": {"family": "year_first"}}
+{"id": "numeric_unambiguous-09", "inputs": {"text": "Invoice #2386 of 23.2.2021: total due 583.85 EUR."}, "expected": "2021-02-23", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "two_digit_year-05", "inputs": {"text": "Payment of 131.78 EUR received on 18/08/28."}, "expected": "2028-08-18", "metadata": {"family": "two_digit_year"}}
+{"id": "written_us-14", "inputs": {"text": "Invoice #3188 of October 21, 2019: total due 630.73 EUR."}, "expected": "2019-10-21", "metadata": {"family": "written_us"}}
+{"id": "two_digit_year-11", "inputs": {"text": "The package left the warehouse on 20/06/25, tracking code 1869."}, "expected": "2025-06-20", "metadata": {"family": "two_digit_year"}}
+{"id": "written_eu-04", "inputs": {"text": "Flight AZ616 departs 8th of April, 2021 from gate 37."}, "expected": "2021-04-08", "metadata": {"family": "written_eu"}}
+{"id": "written_us-08", "inputs": {"text": "Payment of 43.78 EUR received on October 8, 2024."}, "expected": "2024-10-08", "metadata": {"family": "written_us"}}
+{"id": "written_us-00", "inputs": {"text": "Payment of 950.38 EUR received on July 2, 2025."}, "expected": "2025-07-02", "metadata": {"family": "written_us"}}
+{"id": "numeric_ambiguous-06", "inputs": {"text": "Flight AZ6394 departs 03-06-2023 from gate 4."}, "expected": "2023-06-03", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_ambiguous-04", "inputs": {"text": "Signed in Milan on 12.08.2029."}, "expected": "2029-08-12", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "year_first-09", "inputs": {"text": "Signed in Milan on 2024/08/26."}, "expected": "2024-08-26", "metadata": {"family": "year_first"}}
+{"id": "written_us-10", "inputs": {"text": "Payment of 926.86 EUR received on July 27, 2029."}, "expected": "2029-07-27", "metadata": {"family": "written_us"}}
+{"id": "written_us-05", "inputs": {"text": "Invoice #4009 of December 28, 2024: total due 832.18 EUR."}, "expected": "2024-12-28", "metadata": {"family": "written_us"}}
+{"id": "written_us-17", "inputs": {"text": "Invoice #5839 of February 8, 2023: total due 456.23 EUR."}, "expected": "2023-02-08", "metadata": {"family": "written_us"}}
+{"id": "numeric_unambiguous-06", "inputs": {"text": "Payment of 97.04 EUR received on 24.2.2026."}, "expected": "2026-02-24", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "numeric_unambiguous-00", "inputs": {"text": "24.7.2019"}, "expected": "2019-07-24", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "numeric_ambiguous-10", "inputs": {"text": "Payment of 541.24 EUR received on 04/11/2024."}, "expected": "2024-11-04", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "written_us-03", "inputs": {"text": "Meeting moved to June 20, 2025 (room 17)."}, "expected": "2025-06-20", "metadata": {"family": "written_us"}}
+{"id": "year_first-17", "inputs": {"text": "Meeting moved to 2020/10/15 (room 5)."}, "expected": "2020-10-15", "metadata": {"family": "year_first"}}
+{"id": "numeric_ambiguous-01", "inputs": {"text": "Flight AZ1816 departs 07-02-2021 from gate 10."}, "expected": "2021-02-07", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "written_eu-15", "inputs": {"text": "Invoice #5002 of 6th of May, 2019: total due 434.13 EUR."}, "expected": "2019-05-06", "metadata": {"family": "written_eu"}}
+{"id": "two_digit_year-10", "inputs": {"text": "Flight AZ3955 departs 26/04/21 from gate 15."}, "expected": "2021-04-26", "metadata": {"family": "two_digit_year"}}
+{"id": "year_first-11", "inputs": {"text": "Payment of 684.81 EUR received on 2020/09/14."}, "expected": "2020-09-14", "metadata": {"family": "year_first"}}
+{"id": "written_us-16", "inputs": {"text": "Your appointment is confirmed for April 24, 2026 at 18:00."}, "expected": "2026-04-24", "metadata": {"family": "written_us"}}
+{"id": "numeric_unambiguous-12", "inputs": {"text": "Invoice #774 of 28.11.2020: total due 128.79 EUR."}, "expected": "2020-11-28", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "year_first-06", "inputs": {"text": "Meeting moved to 2023/11/25 (room 14)."}, "expected": "2023-11-25", "metadata": {"family": "year_first"}}
+{"id": "numeric_ambiguous-05", "inputs": {"text": "Signed in Milan on 10-04-2025."}, "expected": "2025-04-10", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_ambiguous-19", "inputs": {"text": "Invoice #8770 of 12/11/2023: total due 69.48 EUR."}, "expected": "2023-11-12", "metadata": {"family": "numeric_ambiguous"}}
+{"id": "numeric_unambiguous-14", "inputs": {"text": "Signed in Milan on 21/7/2024."}, "expected": "2024-07-21", "metadata": {"family": "numeric_unambiguous"}}
+{"id": "written_us-04", "inputs": {"text": "Invoice #8186 of September 1, 2019: total due 857.42 EUR."}, "expected": "2019-09-01", "metadata": {"family": "written_us"}}
+{"id": "year_first-05", "inputs": {"text": "Your appointment is confirmed for 2025/06/16 at 8:30."}, "expected": "2025-06-16", "metadata": {"family": "year_first"}}
+{"id": "year_first-12", "inputs": {"text": "Signed in Milan on 2028/02/17."}, "expected": "2028-02-17", "metadata": {"family": "year_first"}}
+{"id": "two_digit_year-09", "inputs": {"text": "18/01/21"}, "expected": "2021-01-18", "metadata": {"family": "two_digit_year"}}
