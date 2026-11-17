@@ -38,6 +38,9 @@ def test_ablation_runs_every_variant_and_seed(tmp_path):
     assert by_name["base"].test_gain_mean == 1.0 and by_name["base"].test_best_std == 0.0
     # cache hits still count as calls, so a variant is not cheaper just because it ran second
     assert all(r.target_calls > 0 and r.agent_calls > 0 for r in result.rows)
+    # all variants share one cache: seed 0 of "full" re-uses many of "base"'s answers
+    rows = {(r.variant, r.seed): r for r in result.rows}
+    assert rows[("base", 0)].fresh_calls > rows[("full", 0)].fresh_calls
     # the full variant also pays for the critic and the reflector
     assert by_name["full"].agent_calls_mean > by_name["base"].agent_calls_mean
     assert (tmp_path / "summary.md").read_text().startswith("| variant")

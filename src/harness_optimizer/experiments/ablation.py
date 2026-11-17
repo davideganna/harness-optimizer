@@ -7,7 +7,13 @@ split, so they are compared on identical data.
 
 Cost is reported as *total* LLM calls (cache hits included), split into target calls (eval
 cost) and agent calls. Cache hits are not subtracted on purpose: variants share one response
-cache, so whichever variant runs first would otherwise look more expensive.
+cache, so whichever variant runs first would otherwise look more expensive. For the same
+reason wall-clock seconds are only comparable together with `fresh_calls` (uncached calls).
+
+Because agent replies are cached too, two variants that send an agent the same request get the
+same reply. Variants therefore share their randomness until their trajectories diverge (common
+random numbers): if a component changes nothing (say, a critic that rejects nothing), its run
+reproduces the base run exactly, and any difference is caused by the component itself.
 
 Results are appended to `rows.jsonl` as each run finishes; re-running with the same output
 directory skips runs that are already there, so a long ablation can be interrupted and resumed.
@@ -68,6 +74,7 @@ class RunRow(BaseModel):
     stop_reason: str | None = None
     target_calls: int = 0
     agent_calls: int = 0
+    fresh_calls: int | None = None  # calls not served from the cache: what the wall-clock time reflects
     seconds: float = 0.0
     error: str | None = None
 
@@ -211,7 +218,9 @@ async def run_ablation(
                 log.exception("run %s seed %d failed", variant.name, seed)
                 row.error = f"{type(e).__name__}: {e}"
             row.seconds = time.monotonic() - t0
+            row.fresh_calls = 0
             for role, stats in gateway.ledger.by_role.items():
+                row.fresh_calls += stats.calls - stats.cache_hits
                 if role == TARGET_ROLE:
                     row.target_calls += stats.calls
                 else:
